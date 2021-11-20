@@ -96,3 +96,24 @@ class MyStack(object):
         """
         return not (self.queue_one or self.queue_two)
 ```
+3. Valid Parentheses (20)
+```python
+class Solution(object):
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        my_dict = {}
+        my_dict['('] = ')'
+        my_dict['{'] = '}'
+        my_dict['['] = ']'
+        my_stack = []
+        for b in s:
+            if my_stack:
+                if my_stack[-1] in my_dict and my_dict[my_stack[-1]] == b:
+                    my_stack.pop()
+                    continue
+            my_stack.append(b)
+        return not my_stack
+```
