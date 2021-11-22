@@ -117,3 +117,53 @@ class Solution(object):
             my_stack.append(b)
         return not my_stack
 ```
+4. Remove All Adjacent Duplicates In String (1047)
+```python
+class Solution(object):
+    def removeDuplicates(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        my_stack = []
+        
+        for i in range(len(s)):
+            if my_stack and my_stack[-1] == s[i]:
+                my_stack.pop()
+            else:
+                my_stack.append(s[i])
+                
+        return ''.join(my_stack)
+```
+5. Evaluate Reverse Polish Notation (150)
+```python
+class Solution(object):
+    def evalRPN(self, tokens):
+        """
+        :type tokens: List[str]
+        :rtype: int
+        """
+        my_stack = []
+        
+        for i in range(len(tokens)):
+            if tokens[i] not in ["+", "-", "*", "/", ]:
+                my_stack.append(int(tokens[i]))
+            elif tokens[i] == "+":
+                second = my_stack.pop()
+                first = my_stack.pop()
+                my_stack.append(first + second)
+            elif tokens[i] == "-":
+                second = my_stack.pop()
+                first = my_stack.pop()
+                my_stack.append(first - second)
+            elif tokens[i] == "*":
+                second = my_stack.pop()
+                first = my_stack.pop()
+                my_stack.append(first * second)
+            elif tokens[i] == "/":
+                second = my_stack.pop()
+                first = my_stack.pop()
+                res = int(first / second)
+                my_stack.append(res)
+        return my_stack.pop()
+```
